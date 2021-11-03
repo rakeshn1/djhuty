@@ -13,5 +13,6 @@ An experimental project to automate the process of applying to jobs.
 - Download the project
 - Navigate to project folder where you can see package.json
 - Execute "npm install" 
+- Update config.js in the project folder with values that have to be filled in the application
 - Start the application with following command(application link to be provided as third agument):
   - node index.js "application link" 
