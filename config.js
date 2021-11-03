@@ -2,7 +2,7 @@
 Type of Fields:
 MANDATORY_FIELD - As the name suggests, these fields are required by application without which application cannot be submitted
 OPTIONAL_FIELD - These are optional fields. User can choose fill these fields or leave it empty. Application can be submitted without these fields
-FIXED_FIELD - These fields aren't configurable yet. The values which are already mentioned in the will be filled. Some more code changes are required to make these fields configurable
+FIXED_FIELD - These fields aren't configurable yet. The values which are already mentioned in the file will be filled. Some more code changes are required to make these fields configurable
  */
 
 module.exports = {
