@@ -27,4 +27,4 @@
 
 
 
-#### !If you are wodering about the unusual name of this project, it's the name of Egyptian god of the moon and of wisdom and learning.
+#### ! If you are wodering about the unusual name of this project, it's the name of Egyptian god of the moon and of wisdom and learning.
