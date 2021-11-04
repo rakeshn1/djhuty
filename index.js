@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 
 const configurations = require('./config.js');
 const fileCheck = require('./utils/fileChecker');
-const {githubLink} = require("./config");
 
 (async () => {
     try{
@@ -13,11 +12,21 @@ const {githubLink} = require("./config");
         }
         const link = process.argv[2]
         console.log(`Opening the application in the link ${link}`)
-        const browser = await puppeteer.launch({headless:false});
+        const browser = await puppeteer.launch({
+            headless:false,
+            args: [
+                // '--no-sandbox',
+                // '--disable-setuid-sandbox',
+                // '--disable-dev-shm-usage',
+                // '--single-process' // can cause the problem of chromium crash in windows
+            ]
+            //  ignoreDefaultArgs: ['--disable-extensions'] // To be enabled if chromium doesn't open in Windows
+        });
         const page = await browser.newPage();
-        await page.goto(link, {waitUntil: 'networkidle2'});
+        await page.goto(link, {waitUntil: 'networkidle2', timeout: 60000});
 
-        await page.waitFor(5000) //Just waiting for the page to load
+        await page.waitFor(4000) //Just waiting for the page to load
+
 
         await page.waitForSelector('input[id=first_name]');
 
@@ -26,6 +35,9 @@ const {githubLink} = require("./config");
         await page.type('input[id=email]', configurations.email, {delay:configurations.delay})
         await page.type('input[id=phone]', configurations.phone, {delay:configurations.delay})
         await page.type('input[id=job_application_location]', configurations.location, {delay:configurations.delay})
+        await page.waitFor(1000);
+        await page.keyboard.press('ArrowDown');
+        await page.keyboard.press('Enter');
 
         console.log("Filled the basic details...")
         // uploading resume
@@ -62,7 +74,11 @@ const {githubLink} = require("./config");
         await page.select("select#job_application_answers_attributes_0_answer_selected_options_attributes_0_question_option_id", "79911515")
 
         // uploading transcripts
-        if(configurations.transcriptsPath.length > 0){
+        let transcript = await page.evaluate(() => {
+            let el = document.querySelector("#question-27502535")
+            return el ? true : false
+        })
+        if(transcript && configurations.transcriptsPath.length > 0){
             let fileCheckResult  = await fileCheck(configurations.transcriptsPath);
             if(fileCheckResult){
                 const [fileChooser] = await Promise.all([
@@ -143,7 +159,7 @@ const {githubLink} = require("./config");
         //     return anchor.textContent;
         // });
         // console.log(text);
-        // await browser.close();
+        await browser.close();
     }catch (e){
         console.error("Error while filling the application:")
         console.error(e)
