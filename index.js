@@ -159,7 +159,7 @@ const fileCheck = require('./utils/fileChecker');
         //     return anchor.textContent;
         // });
         // console.log(text);
-        await browser.close();
+        // await browser.close();
     }catch (e){
         console.error("Error while filling the application:")
         console.error(e)
