@@ -78,13 +78,13 @@ const {undergraduateDataTobeFilled} = require("./config");
         }
 
         // Answer to "Graduation Year" field
-        let graduationYear = await page.evaluate(() => {
-            let el = document.querySelector("#job_application_answers_attributes_0_answer_selected_options_attributes_0_question_option_id")
-            return el ? true : false
-        })
-        if(graduationYear){
-            await page.select("select#job_application_answers_attributes_0_answer_selected_options_attributes_0_question_option_id", "79911515")
-        }
+        // let graduationYear = await page.evaluate(() => {
+        //     let el = document.querySelector("#job_application_answers_attributes_0_answer_selected_options_attributes_0_question_option_id")
+        //     return el ? true : false
+        // })
+        // if(graduationYear){
+        //     await page.select("select#job_application_answers_attributes_0_answer_selected_options_attributes_0_question_option_id", "79911515")
+        // }
 
         // uploading transcripts
         let transcript = await page.evaluate(() => {
@@ -161,40 +161,40 @@ const {undergraduateDataTobeFilled} = require("./config");
             await page.keyboard.type( configurations.undergraduateEndYear, {delay:configurations.delay})
         }
 
-        // // github Link
-        // let gitLink = await page.evaluate(() => {
-        //     let el = document.querySelector("#job_application_answers_attributes_2_text_value")
-        //     return el ? true : false
-        // })
-        // if(gitLink && configurations.githubLink.length > 0){
-        //     await page.type('input[id=job_application_answers_attributes_2_text_value]', configurations.githubLink, {delay:configurations.delay})
-        // }
-        //
-        // // linkedIn profile link
-        // let linLink = await page.evaluate(() => {
-        //     let el = document.querySelector("#job_application_answers_attributes_3_text_value")
-        //     return el ? true : false
-        // })
-        // if(linLink && configurations.linkedInProfile.length > 0){
-        //     await page.type('input[id=job_application_answers_attributes_3_text_value]', configurations.linkedInProfile, {delay:configurations.delay})
-        // }
-        //
-        // // website link
-        // let webLink = await page.evaluate(() => {
-        //     let el = document.querySelector("#job_application_answers_attributes_4_text_value")
-        //     return el ? true : false
-        // })
-        // if(webLink && configurations.websiteLink.length > 0){
-        //     await page.type('input[id=job_application_answers_attributes_4_text_value]', configurations.websiteLink, {delay:configurations.delay})
-        // }
-
-        // Answer to "How  did you hear about this job"
-        let source = await page.evaluate(() => {
-            let el = document.querySelector("#job_application_answers_attributes_5_answer_selected_options_attributes_5_question_option_id")
+        // github Link
+        let gitLink = await page.evaluate(() => {
+            let el = document.querySelector('input[autocomplete="custom-question-github-link"]')
             return el ? true : false
         })
-        if(source)
-        await page.select("select#job_application_answers_attributes_5_answer_selected_options_attributes_5_question_option_id", "79911521")
+        if(gitLink && configurations.githubLink.length > 0){
+            await page.type('input[autocomplete="custom-question-github-link"]', configurations.githubLink, {delay:configurations.delay})
+        }
+
+        // linkedIn profile link
+        let linLink = await page.evaluate(() => {
+            let el = document.querySelector('input[autocomplete="custom-question-linkedin-profile"]')
+            return el ? true : false
+        })
+        if(linLink && configurations.linkedInProfile.length > 0){
+            await page.type('input[autocomplete="custom-question-linkedin-profile"]', configurations.linkedInProfile, {delay:configurations.delay})
+        }
+
+        // website link
+        let webLink = await page.evaluate(() => {
+            let el = document.querySelector('input[autocomplete="custom-question-website"]')
+            return el ? true : false
+        })
+        if(webLink && configurations.websiteLink.length > 0){
+            await page.type('input[autocomplete="custom-question-website"]', configurations.websiteLink, {delay:configurations.delay})
+        }
+
+        // Answer to "How  did you hear about this job"
+        // let source = await page.evaluate(() => {
+        //     let el = document.querySelector("#job_application_answers_attributes_5_answer_selected_options_attributes_5_question_option_id")
+        //     return el ? true : false
+        // })
+        // if(source)
+        // await page.select("select#job_application_answers_attributes_5_answer_selected_options_attributes_5_question_option_id", "79911521")
 
         // // Answer to "Do you currently have authorization to work in the United States?"
         // if(configurations.workAuthorization?.toLowerCase() === "yes"){
@@ -231,20 +231,6 @@ const {undergraduateDataTobeFilled} = require("./config");
         // Disability Status
         await page.select("select#job_application_disability_status", "2")
 
-        //await page.click('#s2id_job_application_answers_attributes_0_answer_selected_options_attributes_0_question_option_id a');
-        // await page.click('input[value="Login"')
-        //
-        // // await page.type('input[name=search]', 'Adenosine triphosphate');
-        // await page.$eval('input[name=search]', el => el.value = 'Adenosine triphosphate');
-        //
-        // await page.click('input[type="submit"]');
-        // await page.waitForSelector('#mw-content-text');
-        // const text = await page.evaluate(() => {
-        //     const anchor = document.querySelector('#mw-content-text');
-        //     return anchor.textContent;
-        // });
-        // console.log(text);
-        // await browser.close();
     }catch (e){
         console.error("Error while filling the application:")
         console.error(e)
