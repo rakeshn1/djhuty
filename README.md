@@ -2,9 +2,12 @@
 
 - An experimental project to automate the process of filling a job application. 
 
+#### This project is written specific to applications on "boards.greenhouse.io" website.
+- It fills the common fields found in all the application and custom fields which are specific to each application has to be filled by user before submitting.
+
 ### As mentioned above this is a experimental project, so it is advised to check your application after it is filled.
 
--> This project is written specific to applications on "boards.greenhouse.io" website.
+
 
 
 ### How to start
